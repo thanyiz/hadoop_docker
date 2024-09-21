@@ -1,0 +1,48 @@
+services:
+  node1:
+    image: adxs/hadoop:1
+    container_name: node1
+    hostname: node1
+    volumes:
+        - ./hadoop_etc/core-site.xml:/opt/hadoop/etc/core-site.xml
+        - ./hadoop_etc/hdfs-site.xml:/opt/hadoop/etc/hdfs-site.xml
+        - ./hadoop_etc/hadoop_env.sh:/opt/hadoop/etc/hadoop_env.sh
+        - ./hadoop_etc/workers:/opt/hadoop/etc/workers
+    command: ["/bin/bash", "-c", "sleep 10 && hadoop namenode -format && start-dfs.sh"]
+    networks:
+      big_data:
+        ipv4_address: 172.18.0.1
+
+  node2:
+    image: adxs/hadoop:1
+    container_name: node2
+    hostname: node2
+    volumes:
+        - ./hadoop_etc/core-site.xml:/opt/hadoop/etc/core-site.xml
+        - ./hadoop_etc/hdfs-site.xml:/opt/hadoop/etc/hdfs-site.xml
+        - ./hadoop_etc/hadoop_env.sh:/opt/hadoop/etc/hadoop_env.sh
+        - ./hadoop_etc/workers:/opt/hadoop/etc/workers
+    networks:
+      big_data:
+        ipv4_address: 172.18.0.2
+
+  node3:
+    image: adxs/hadoop:1
+    container_name: node3
+    hostname: node3
+    volumes:
+        - ./hadoop_etc/core-site.xml:/opt/hadoop/etc/core-site.xml
+        - ./hadoop_etc/hdfs-site.xml:/opt/hadoop/etc/hdfs-site.xml
+        - ./hadoop_etc/hadoop_env.sh:/opt/hadoop/etc/hadoop_env.sh
+        - ./hadoop_etc/workers:/opt/hadoop/etc/workers
+    networks:
+      big_data:
+        ipv4_address: 172.18.0.3
+
+networks:
+  big_data:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.254

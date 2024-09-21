@@ -1,0 +1,10 @@
+FROM adxs/ssh:1
+COPY ./hadoop-3.3.6.tar.gz /tmp/hadoop-3.3.6.tar.gz
+RUN mkdir /opt/hadoop && \
+    tar -zxf /tmp/hadoop-3.3.6.tar.gz --strip-components=1 -C /opt/hadoop && \
+    rm -f /tmp/hadoop-3.3.6.tar.gz && \
+    mkdir -p /data/dn && \
+    mkdir -p /data/nn 
+
+ENV HADOOP_HOME=/opt/hadoop
+ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin

@@ -1,0 +1,34 @@
+services:
+  node1:
+    image: adxs/ssh:1
+    container_name: node1
+    hostname: node1
+    volumes:
+        - ./hadoop_etc/
+    networks:
+      big_data:
+        ipv4_address: 172.18.0.1
+
+  node2:
+    image: adxs/ssh:1
+    container_name: node2
+    hostname: node2
+    networks:
+      big_data:
+        ipv4_address: 172.18.0.2
+
+  node3:
+    image: adxs/ssh:1
+    container_name: node3
+    hostname: node3
+    networks:
+      big_data:
+        ipv4_address: 172.18.0.3
+
+networks:
+  big_data:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.254
