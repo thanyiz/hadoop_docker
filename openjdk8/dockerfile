@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM adxs/s6-o
 COPY ./openjdk-8u44-linux-x64.tar.gz /tmp/
 RUN /bin/sh -c set -eux; \
     mkdir -p /opt/java/openjdk; \
