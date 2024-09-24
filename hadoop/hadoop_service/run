@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/opt/hadoop/sbin/hadoop namenode -format
+/opt/hadoop/sbin/start-dfs.sh
