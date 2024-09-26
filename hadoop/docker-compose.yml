@@ -4,45 +4,39 @@ services:
     container_name: node1
     hostname: node1
     volumes:
-        - ./hadoop_etc/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-        - ./hadoop_etc/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
-        - ./hadoop_etc/hadoop-env.sh:/opt/hadoop/etc/hadoop/hadoop-env.sh
-        - ./hadoop_etc/workers:/opt/hadoop/etc/hadoop/workers
+        - ./hadoop_etc/:/opt/hadoop/etc/hadoop/
     networks:
       big_data:
         ipv4_address: 172.18.0.1
     ports:
       - "9871:9870"
+      - "8081:8088"
 
   node2:
     image: adxs/hadoop
     container_name: node2
     hostname: node2
     volumes:
-        - ./hadoop_etc/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-        - ./hadoop_etc/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
-        - ./hadoop_etc/hadoop-env.sh:/opt/hadoop/etc/hadoop/hadoop-env.sh
-        - ./hadoop_etc/workers:/opt/hadoop/etc/hadoop/workers
+        - ./hadoop_etc/:/opt/hadoop/etc/hadoop/
     networks:
       big_data:
         ipv4_address: 172.18.0.2
     ports:
       - "9872:9870"
+      - "8082:8088"
 
   node3:
     image: adxs/hadoop
     container_name: node3
     hostname: node3
     volumes:
-        - ./hadoop_etc/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-        - ./hadoop_etc/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
-        - ./hadoop_etc/hadoop-env.sh:/opt/hadoop/etc/hadoop/hadoop-env.sh
-        - ./hadoop_etc/workers:/opt/hadoop/etc/hadoop/workers
+        - ./hadoop_etc/:/opt/hadoop/etc/hadoop/
     networks:
       big_data:
         ipv4_address: 172.18.0.3
     ports:
       - "9873:9870"
+      - "8083:8088"
 
 networks:
   big_data:
