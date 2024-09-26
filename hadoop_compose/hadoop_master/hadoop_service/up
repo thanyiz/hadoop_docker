@@ -1,0 +1,1 @@
+/bin/bash -c "/root/hadoop_init_start.sh"

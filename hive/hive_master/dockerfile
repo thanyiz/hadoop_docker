@@ -1,0 +1,12 @@
+FROM adxs/hadoop_master
+
+# mysql
+RUN apt update && \
+    apt install -y mysql-server && \
+    touch /etc/s6-overlay/s6-rc.d/user/contents.d/mysqld && \
+    touch /etc/s6-overlay/s6-rc.d/user/contents.d/mysql_init
+
+COPY mysqld /etc/s6-overlay/s6-rc.d/mysqld
+COPY mysqld /etc/s6-overlay/s6-rc.d/mysql_init
+COPY mysql_init.sh /root/mysql_init.sh
+RUN chmod +x /root/mysql_init.sh

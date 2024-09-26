@@ -1,0 +1,26 @@
+<configuration>
+    <property>
+        <name>dfs.datanode.data.dir.perm</name>
+        <value>700</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>/data/nn</value>
+    </property>
+    <property>
+        <name>dfs.namenode.hosts</name>
+        <value>node1,node2,node3</value>
+    </property>
+    <property>
+        <name>dfs.blocksize</name>
+        <value>268435456</value>
+    </property>
+    <property>
+        <name>dfs.namenode.handler.count</name>
+        <value>100</value>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>/data/dn</value>
+    </property>
+</configuration>

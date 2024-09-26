@@ -1,0 +1,24 @@
+FROM adxs/ssh
+
+COPY ./hadoop-3.3.6.tar.gz /tmp/hadoop-3.3.6.tar.gz
+
+RUN mkdir /opt/hadoop && \
+    tar -zxf /tmp/hadoop-3.3.6.tar.gz --strip-components=1 -C /opt/hadoop && \
+    rm -f /tmp/hadoop-3.3.6.tar.gz && \
+    mkdir -p /data/dn && \
+    mkdir -p /data/nn 
+
+ENV HADOOP_HOME=/opt/hadoop
+ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/ssh_copy_id 
+ 
+COPY ssh_copy_id /etc/s6-overlay/s6-rc.d/ssh_copy_id
+COPY init_ssh_copy_id.sh /root/init_ssh_copy_id.sh
+RUN chmod +x /root/init_ssh_copy_id.sh
+
+RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/hadoop_service
+COPY hadoop_service /etc/s6-overlay/s6-rc.d/hadoop_service
+
+COPY hadoop_init_start.sh /root/hadoop_init_start.sh
+RUN chmod +x /root/hadoop_init_start.sh

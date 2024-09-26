@@ -1,0 +1,1 @@
+/bin/bash -c "/root/init_ssh_copy_id.sh"
