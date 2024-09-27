@@ -2,11 +2,15 @@ FROM adxs/hadoop_master
 
 # mysql
 RUN apt update && \
-    apt install -y mysql-server && \
-    touch /etc/s6-overlay/s6-rc.d/user/contents.d/mysqld && \
-    touch /etc/s6-overlay/s6-rc.d/user/contents.d/mysql_init
+    apt install -y mysql-client
+RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/hive_init_start 
 
-COPY mysqld /etc/s6-overlay/s6-rc.d/mysqld
-COPY mysqld /etc/s6-overlay/s6-rc.d/mysql_init
-COPY mysql_init.sh /root/mysql_init.sh
-RUN chmod +x /root/mysql_init.sh
+COPY hive_init_start /etc/s6-overlay/s6-rc.d/hive_init_start
+
+COPY hive_init_start.sh /root/hive_init_start.sh
+RUN chmod +x /root/hive_init_start.sh
+
+COPY ./apache-hive-3.1.3-bin.tar.gz /opt/apache-hive-3.1.3-bin.tar.gz
+RUN tar -zxf /opt/apache-hive-3.1.3-bin.tar.gz -C /opt/ && \ 
+    mv /opt/apache-hive-3.1.3-bin /opt/hive 
+COPY mysql-connector-j-8.4.0.jar /opt/hive/lib
